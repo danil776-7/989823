@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>СервисПрофи | Корпоративный портал услуг</title>
+  <title>ServicePro | Корпоративный портал</title>
   <style>
     * {
       margin: 0;
@@ -18,13 +18,11 @@
       color: #0F172A;
     }
 
-    /* контейнер */
     .container {
       max-width: 1280px;
       margin: 0 auto;
     }
 
-    /* хедер */
     .header {
       margin-bottom: 48px;
       text-align: center;
@@ -44,7 +42,6 @@
       font-size: 1rem;
     }
 
-    /* каталог - сетка */
     .catalog {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
@@ -52,12 +49,11 @@
       margin-bottom: 56px;
     }
 
-    /* карточка услуги */
     .service-card {
       background: #FFFFFF;
       border-radius: 24px;
       padding: 24px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
       transition: all 0.2s ease;
       border: 1px solid #E2E8F0;
       cursor: pointer;
@@ -105,7 +101,7 @@
       background: #114A46;
     }
 
-    /* модальное окно - профессиональный стиль */
+    /* Модальное окно */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -129,7 +125,7 @@
     .modal-container {
       background: #FFFFFF;
       width: 90%;
-      max-width: 680px;
+      max-width: 700px;
       border-radius: 32px;
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
       overflow: hidden;
@@ -158,7 +154,6 @@
       font-size: 28px;
       cursor: pointer;
       color: #94A3B8;
-      line-height: 1;
       transition: color 0.2s;
     }
     .close-modal:hover {
@@ -170,12 +165,12 @@
       overflow-y: auto;
     }
 
-    /* информационный блок */
+    /* Инфо-блок */
     .info-block {
       background: #F8FAFE;
       border-radius: 20px;
       padding: 18px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       border: 1px solid #E2EDF2;
     }
     .service-info-row {
@@ -218,6 +213,7 @@
       background: #EFF6F8;
       padding: 4px 12px;
       border-radius: 40px;
+      word-break: break-all;
     }
     .refresh-geo {
       background: none;
@@ -229,41 +225,7 @@
       color: #2D5F6E;
     }
 
-    /* блок загрузки фото */
-    .upload-block {
-      background: #FFFFFF;
-      border: 1px solid #E2E8F0;
-      border-radius: 20px;
-      padding: 16px;
-      margin-bottom: 24px;
-    }
-    .upload-label {
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: #334155;
-      margin-bottom: 12px;
-      display: block;
-    }
-    .file-input {
-      font-size: 0.8rem;
-      color: #334155;
-      width: 100%;
-    }
-    .photo-preview {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 14px;
-    }
-    .preview-thumb {
-      width: 64px;
-      height: 64px;
-      object-fit: cover;
-      border-radius: 12px;
-      border: 1px solid #CFE0E9;
-    }
-
-    /* ЧАТ — профессиональный, чистый */
+    /* Чат - современный вид */
     .chat-section {
       margin-top: 8px;
     }
@@ -272,13 +234,12 @@
       font-size: 0.9rem;
       color: #1E2A3A;
       margin-bottom: 12px;
-      letter-spacing: -0.2px;
     }
     .chat-messages {
       background: #F9FCFE;
       border-radius: 24px;
       border: 1px solid #E2EDF2;
-      height: 260px;
+      height: 280px;
       overflow-y: auto;
       padding: 16px;
       display: flex;
@@ -307,40 +268,75 @@
       align-self: flex-start;
       border-bottom-left-radius: 6px;
     }
-    .chat-input-area {
+    
+    /* Нижняя панель чата: кнопка файла + инпут + отправка */
+    .chat-input-wrapper {
       display: flex;
-      gap: 12px;
       align-items: center;
-    }
-    .chat-input {
-      flex: 1;
-      padding: 12px 18px;
+      gap: 10px;
+      background: #FFFFFF;
+      border: 1px solid #E2EDF2;
       border-radius: 60px;
-      border: 1px solid #CBDEE8;
-      font-size: 0.85rem;
-      outline: none;
-      background: white;
+      padding: 4px 6px 4px 16px;
+      transition: all 0.2s;
     }
-    .chat-input:focus {
+    .chat-input-wrapper:focus-within {
       border-color: #2D7A72;
-      box-shadow: 0 0 0 3px rgba(45,122,114,0.1);
+      box-shadow: 0 0 0 2px rgba(45,122,114,0.1);
     }
-    .send-btn {
-      background: #1E5F5A;
+    .file-button {
+      background: transparent;
       border: none;
-      width: 44px;
-      height: 44px;
-      border-radius: 44px;
-      color: white;
-      font-weight: 600;
+      font-size: 1.3rem;
       cursor: pointer;
-      transition: 0.2s;
+      padding: 8px 8px;
+      border-radius: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
+      color: #5F7D94;
+      transition: color 0.2s;
     }
-    .send-btn:hover {
+    .file-button:hover {
+      color: #1E5F5A;
+    }
+    .chat-input {
+      flex: 1;
+      border: none;
+      padding: 12px 0;
+      font-size: 0.9rem;
+      outline: none;
+      background: transparent;
+    }
+    .send-button {
+      background: #1E5F5A;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 40px;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .send-button:hover {
       background: #114A46;
+    }
+    .photo-preview-area {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+      margin-bottom: 12px;
+    }
+    .preview-thumb {
+      width: 56px;
+      height: 56px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid #CFE0E9;
     }
     .note-text {
       font-size: 0.7rem;
@@ -356,6 +352,9 @@
       background: #EFF3F8;
       padding: 12px;
       border-radius: 48px;
+    }
+    #hiddenFileInput {
+      display: none;
     }
     @media (max-width: 580px) {
       .modal-body { padding: 20px; }
@@ -383,41 +382,43 @@
       <button class="close-modal" id="closeModalBtn">&times;</button>
     </div>
     <div class="modal-body">
-      <!-- Информационная панель -->
+      <!-- Инфо-блок -->
       <div class="info-block">
         <div class="service-info-row">
           <span class="service-name" id="selectedServiceName"></span>
           <span class="service-price-info" id="selectedServicePrice"></span>
         </div>
         <div class="geo-row">
-          <span class="geo-label">🌍 Геолокация</span>
+          <span class="geo-label">📍 Геолокация</span>
           <span class="geo-value" id="geoStatusText">Определение...</span>
           <button class="refresh-geo" id="refreshGeoBtn">Обновить</button>
         </div>
       </div>
 
-      <!-- Загрузка фото -->
-      <div class="upload-block">
-        <div class="upload-label">Прикрепить фото (отправятся в Telegram)</div>
-        <input type="file" id="photoFileInput" accept="image/*" multiple class="file-input">
-        <div class="photo-preview" id="photoPreviewArea"></div>
-      </div>
-
-      <!-- Чат -->
+      <!-- Чат с нижней панелью для файлов -->
       <div class="chat-section">
         <div class="chat-title">Чат с менеджером</div>
         <div class="chat-messages" id="chatMessagesContainer">
-          <div class="message bot">Выберите услугу из каталога. После открытия будет создана отдельная тема в Telegram, и все сообщения будут переданы специалисту.</div>
+          <div class="message bot">Выберите услугу из каталога. После открытия будет создана отдельная тема в Telegram.</div>
         </div>
-        <div class="chat-input-area">
-          <input type="text" id="chatInputField" class="chat-input" placeholder="Введите сообщение...">
-          <button class="send-btn" id="sendMessageBtn">→</button>
+        
+        <!-- Превью фото -->
+        <div class="photo-preview-area" id="photoPreviewArea"></div>
+        
+        <!-- Нижняя панель: кнопка файла + поле ввода + отправить -->
+        <div class="chat-input-wrapper">
+          <button class="file-button" id="attachFileBtn" title="Прикрепить фото">📎</button>
+          <input type="text" id="chatInputField" class="chat-input" placeholder="Введите сообщение..." autocomplete="off">
+          <button class="send-button" id="sendMessageBtn">→</button>
         </div>
         <div class="note-text">Геолокация передаётся один раз при открытии. Ответы менеджера не дублируются.</div>
       </div>
     </div>
   </div>
 </div>
+
+<!-- скрытый input для файлов -->
+<input type="file" id="hiddenFileInput" accept="image/*" multiple style="display:none">
 
 <script>
   // ---------- Telegram Configuration ----------
@@ -430,12 +431,13 @@
   let currentService = null;
   let modalActive = false;
   let geoAlreadySent = false;
-  let lastUpdateId = 0;
-  let pollingTimer = null;
+  let lastProcessedUpdateId = 0;
+  let pollingInterval = null;
   let userLocation = { lat: null, lon: null, address: "Не определена" };
-  let pendingPhotoFiles = [];
-
-  // DOM elements
+  let pendingFiles = [];        // выбранные файлы для отправки
+  let lastManagerMessageHash = ""; // для защиты от дублей
+  
+  // DOM
   const catalogGrid = document.getElementById("catalogGrid");
   const modalOverlay = document.getElementById("serviceModal");
   const closeModalBtn = document.getElementById("closeModalBtn");
@@ -443,14 +445,15 @@
   const selectedServicePriceSpan = document.getElementById("selectedServicePrice");
   const geoStatusSpan = document.getElementById("geoStatusText");
   const refreshGeoBtn = document.getElementById("refreshGeoBtn");
-  const photoInput = document.getElementById("photoFileInput");
-  const photoPreviewDiv = document.getElementById("photoPreviewArea");
   const chatMessagesDiv = document.getElementById("chatMessagesContainer");
   const chatInput = document.getElementById("chatInputField");
   const sendBtn = document.getElementById("sendMessageBtn");
+  const attachBtn = document.getElementById("attachFileBtn");
+  const hiddenFileInput = document.getElementById("hiddenFileInput");
+  const photoPreviewArea = document.getElementById("photoPreviewArea");
 
   // ----- Геолокация (автоматически при открытии) -----
-  function getCurrentLocation(forceSendToTelegram = false) {
+  function getCurrentLocation(forceSend = false) {
     if (!navigator.geolocation) {
       geoStatusSpan.innerText = "Не поддерживается";
       return Promise.resolve(null);
@@ -462,7 +465,7 @@
           userLocation.lon = position.coords.longitude;
           userLocation.address = `${userLocation.lat.toFixed(5)}, ${userLocation.lon.toFixed(5)}`;
           geoStatusSpan.innerText = userLocation.address;
-          // улучшим адрес через reverse geocoding (опционально)
+          // улучшаем адрес
           fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${userLocation.lat}&lon=${userLocation.lon}&zoom=16`)
             .then(res => res.json())
             .then(data => {
@@ -472,9 +475,8 @@
               }
             })
             .catch(() => {});
-          if (forceSendToTelegram && currentTopicId && !geoAlreadySent) {
-            sendLocationToTelegram();
-            geoAlreadySent = true;
+          if (forceSend && currentTopicId && !geoAlreadySent) {
+            sendLocationToTelegram().then(() => { geoAlreadySent = true; });
           }
           resolve(userLocation);
         },
@@ -494,7 +496,7 @@
     return await sendTelegramMessage(text, currentTopicId);
   }
 
-  // Отправка сообщения или фото в Telegram (в топик)
+  // Отправка сообщения или фото
   async function sendTelegramMessage(text, topicId = null, photoFile = null) {
     const chatId = GROUP_ID;
     if (photoFile) {
@@ -523,7 +525,7 @@
     }
   }
 
-  // Создание топика в группе
+  // Создание топика
   async function createTelegramTopic(serviceName, clientId) {
     const topicTitle = `Заказ: ${serviceName} | ${clientId.slice(-6)}`;
     const url = `https://api.telegram.org/bot${BOT_TOKEN}/createForumTopic`;
@@ -536,8 +538,7 @@
       const data = await response.json();
       if (data.ok && data.result) {
         currentTopicId = data.result.message_thread_id;
-        await sendTelegramMessage(`✅ *Новое обращение*\n👤 ID: ${clientId}\n🛒 Услуга: ${serviceName}\n🌐 Статус: ожидает сообщений`, currentTopicId);
-        // отправляем гео если есть
+        await sendTelegramMessage(`✅ *Новое обращение*\n👤 ID: ${clientId}\n🛒 Услуга: ${serviceName}`, currentTopicId);
         if (userLocation.lat && !geoAlreadySent) {
           await sendLocationToTelegram();
           geoAlreadySent = true;
@@ -550,8 +551,28 @@
     } catch(e) { console.warn(e); return null; }
   }
 
-  // Отправка сообщения от пользователя
-  async function sendUserMessage(text, files = []) {
+  // Добавление сообщений в чат
+  function addMessageToChat(text, sender, isFileMsg = false) {
+    const msgDiv = document.createElement("div");
+    msgDiv.className = `message ${sender}`;
+    msgDiv.innerText = text;
+    chatMessagesDiv.appendChild(msgDiv);
+    chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
+  }
+
+  function addBotMessage(text) {
+    // защита от мгновенных дублей (если完全相同)
+    const lastMsg = chatMessagesDiv.lastChild;
+    if (lastMsg && lastMsg.classList && lastMsg.classList.contains('message') && lastMsg.innerText === text) return;
+    const msgDiv = document.createElement("div");
+    msgDiv.className = "message bot";
+    msgDiv.innerText = text;
+    chatMessagesDiv.appendChild(msgDiv);
+    chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
+  }
+
+  // Отправка сообщения и файлов пользователем
+  async function sendUserMessage(text, files) {
     if (!text.trim() && files.length === 0) return;
     if (text.trim()) {
       addMessageToChat(text, "user");
@@ -562,107 +583,108 @@
       }
       for (let file of files) {
         await sendTelegramMessage("📎 Вложение", currentTopicId, file);
-        addMessageToChat("📎 Фото прикреплено", "user");
+        addMessageToChat("📎 Фото", "user");
       }
     }
     chatInput.value = "";
-    pendingPhotoFiles = [];
-    photoPreviewDiv.innerHTML = "";
-    if (photoInput) photoInput.value = "";
+    // очищаем превью и массив файлов
+    clearPendingFiles();
+  }
+  
+  function clearPendingFiles() {
+    pendingFiles = [];
+    photoPreviewArea.innerHTML = "";
+    if (hiddenFileInput) hiddenFileInput.value = "";
   }
 
-  function addMessageToChat(text, sender, isImagePreview = false, imageData = null) {
-    const msgDiv = document.createElement("div");
-    msgDiv.className = `message ${sender}`;
-    msgDiv.innerText = text;
-    chatMessagesDiv.appendChild(msgDiv);
-    chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
-  }
-
-  function addBotMessage(text) {
-    const msgDiv = document.createElement("div");
-    msgDiv.className = "message bot";
-    msgDiv.innerText = text;
-    chatMessagesDiv.appendChild(msgDiv);
-    chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
+  // Превью файлов
+  function updatePhotoPreview(files) {
+    photoPreviewArea.innerHTML = "";
+    for (let file of files) {
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const img = document.createElement("img");
+        img.src = ev.target.result;
+        img.className = "preview-thumb";
+        photoPreviewArea.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
   // Поллинг ответов менеджера (без дублей)
   async function pollManagerResponses() {
-    if (!modalActive) return;
-    const url = `https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?offset=${lastUpdateId + 1}&timeout=10`;
+    if (!modalActive || !currentTopicId) return;
+    const url = `https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?offset=${lastProcessedUpdateId + 1}&timeout=10`;
     try {
       const resp = await fetch(url);
       const data = await resp.json();
       if (data.ok && data.result.length) {
         for (const update of data.result) {
-          lastUpdateId = update.update_id;
+          const updateId = update.update_id;
+          if (updateId <= lastProcessedUpdateId) continue;
+          lastProcessedUpdateId = updateId;
           const msg = update.message;
           if (!msg || !msg.text) continue;
           const isOurTopic = (msg.message_thread_id && currentTopicId && msg.message_thread_id === currentTopicId);
           const isDirectGroup = (!currentTopicId && msg.chat.id.toString() === GROUP_ID);
           if ((isOurTopic || isDirectGroup) && msg.from && !msg.from.is_bot) {
-            addBotMessage(`Менеджер: ${msg.text}`);
+            const managerText = msg.text;
+            // дополнительная защита: не показываем одно и то же сообщение дважды
+            const lastBotMsg = chatMessagesDiv.lastChild;
+            if (lastBotMsg && lastBotMsg.classList && lastBotMsg.classList.contains('message') && lastBotMsg.innerText === `Менеджер: ${managerText}`) continue;
+            addBotMessage(`Менеджер: ${managerText}`);
           }
         }
       }
     } catch(e) { console.warn(e); }
   }
 
-  // Инициализация модального окна с услугой
+  // Инициализация модального окна
   async function openModalWithService(service) {
+    if (pollingInterval) clearInterval(pollingInterval);
     currentService = service;
     currentSessionId = `client_${Date.now()}_${Math.floor(Math.random() * 9000 + 1000)}`;
     currentTopicId = null;
     geoAlreadySent = false;
     userLocation = { lat: null, lon: null, address: "Не определена" };
-    
-    selectedServiceNameSpan.innerText = `${service.name}`;
+    selectedServiceNameSpan.innerText = service.name;
     selectedServicePriceSpan.innerText = service.price;
     geoStatusSpan.innerText = "Определение...";
-    chatMessagesDiv.innerHTML = `<div class="message bot">Создаётся защищённый канал связи с менеджером. Пожалуйста, ожидайте...</div>`;
+    chatMessagesDiv.innerHTML = `<div class="message bot">Создаю защищённый канал. Пожалуйста, подождите...</div>`;
     modalOverlay.classList.add("active");
     modalActive = true;
     
-    // сначала запрашиваем гео (автоматически, и отображаем)
     await getCurrentLocation(false);
-    
-    // создаём топик Телеграм
     await createTelegramTopic(service.name, currentSessionId);
-    addBotMessage(`Тема создана. Вы можете отправлять сообщения и фото. Менеджер ответит в этом окне.`);
+    addBotMessage("Тема создана. Можете отправлять сообщения и фото. Ответы менеджера будут приходить сюда.");
     
-    // запускаем поллинг ответов
-    if (pollingTimer) clearInterval(pollingTimer);
-    pollingTimer = setInterval(() => pollManagerResponses(), 4000);
+    pollingInterval = setInterval(() => pollManagerResponses(), 4500);
     chatInput.focus();
+    clearPendingFiles();
   }
 
   function closeModal() {
     modalOverlay.classList.remove("active");
     modalActive = false;
-    if (pollingTimer) {
-      clearInterval(pollingTimer);
-      pollingTimer = null;
+    if (pollingInterval) {
+      clearInterval(pollingInterval);
+      pollingInterval = null;
     }
     currentTopicId = null;
-    pendingPhotoFiles = [];
-    if (photoPreviewDiv) photoPreviewDiv.innerHTML = "";
+    clearPendingFiles();
   }
 
-  // Фото превью
-  photoInput.addEventListener("change", (e) => {
-    pendingPhotoFiles = Array.from(e.target.files);
-    photoPreviewDiv.innerHTML = "";
-    pendingPhotoFiles.forEach(file => {
-      const reader = new FileReader();
-      reader.onload = (ev) => {
-        const img = document.createElement("img");
-        img.src = ev.target.result;
-        img.className = "preview-thumb";
-        photoPreviewDiv.appendChild(img);
-      };
-      reader.readAsDataURL(file);
-    });
+  // Прикрепление файлов через кнопку
+  attachBtn.addEventListener("click", () => {
+    hiddenFileInput.click();
+  });
+  
+  hiddenFileInput.addEventListener("change", (e) => {
+    if (e.target.files && e.target.files.length) {
+      pendingFiles = Array.from(e.target.files);
+      updatePhotoPreview(pendingFiles);
+    }
   });
 
   refreshGeoBtn.addEventListener("click", async () => {
@@ -670,32 +692,34 @@
     if (currentTopicId && !geoAlreadySent && userLocation.lat) {
       await sendLocationToTelegram();
       geoAlreadySent = true;
-      addBotMessage("Геолокация обновлена и отправлена менеджеру.");
+      addBotMessage("Геолокация отправлена менеджеру.");
     } else if (geoAlreadySent) {
       addBotMessage("Геолокация уже была передана ранее.");
+    } else if (!userLocation.lat) {
+      addBotMessage("Не удалось определить геолокацию. Проверьте разрешения.");
     }
   });
 
   sendBtn.addEventListener("click", async () => {
     const msgText = chatInput.value.trim();
-    if (!msgText && pendingPhotoFiles.length === 0) return;
-    await sendUserMessage(msgText, pendingPhotoFiles);
-    pendingPhotoFiles = [];
-    photoPreviewDiv.innerHTML = "";
-    if (photoInput) photoInput.value = "";
+    if (!msgText && pendingFiles.length === 0) return;
+    await sendUserMessage(msgText, pendingFiles);
+    clearPendingFiles();
   });
+  
   chatInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       sendBtn.click();
     }
   });
+  
   closeModalBtn.addEventListener("click", closeModal);
   modalOverlay.addEventListener("click", (e) => {
     if (e.target === modalOverlay) closeModal();
   });
 
-  // ----- КАТАЛОГ УСЛУГ (профессиональный) -----
+  // ----- КАТАЛОГ УСЛУГ -----
   const services = [
     { id: 1, name: "Разработка веб-платформ", description: "Сайты, CRM, порталы под ключ", price: "от 55 000 ₽", icon: "💻" },
     { id: 2, name: "SEO-аудит и продвижение", description: "Рост трафика до 300%", price: "от 29 000 ₽/мес", icon: "📊" },
