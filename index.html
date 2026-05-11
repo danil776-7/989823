@@ -3,65 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>СервисПрофи | Современный каталог услуг + Telegram Топики и WebSocket</title>
+  <title>СервисПрофи | Услуги + Telegram Топики | Фото + Гео</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
     }
 
     body {
-      background: radial-gradient(circle at 10% 20%, rgba(245, 248, 255, 1) 0%, rgba(235, 242, 252, 1) 100%);
+      background: radial-gradient(circle at 10% 20%, #f0f6fe 0%, #e3edf7 100%);
       min-height: 100vh;
       padding: 20px 20px 50px;
     }
 
-    /* гладкий контейнер */
     .container {
       max-width: 1300px;
       margin: 0 auto;
     }
 
-    /* шапка с градиентом и эффектом стекла */
     .header {
       text-align: center;
-      margin-bottom: 50px;
+      margin-bottom: 40px;
       padding: 20px 20px 30px;
-      background: rgba(255,255,255,0.5);
-      backdrop-filter: blur(8px);
-      border-radius: 80px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(10px);
+      border-radius: 70px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
     }
     .header h1 {
-      font-size: 2.8rem;
+      font-size: 2.7rem;
       font-weight: 800;
-      background: linear-gradient(135deg, #163A5F, #1E6B5E, #2C9B77);
+      background: linear-gradient(135deg, #1a4d5f, #1e6b5e, #2c9b77);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      letter-spacing: -0.01em;
     }
     .header p {
-      color: #2c4e6e;
-      font-size: 1.15rem;
-      margin-top: 12px;
+      color: #2c5a6e;
+      margin-top: 10px;
       font-weight: 500;
     }
-    .badge-tele {
-      display: inline-block;
-      background: #27a5e7;
-      color: white;
-      border-radius: 60px;
-      padding: 5px 16px;
-      font-size: 0.8rem;
-      margin-top: 12px;
-      font-weight: 600;
-      backdrop-filter: blur(2px);
-    }
 
-    /* каталог - современная сетка */
     .catalog {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
@@ -70,84 +54,46 @@
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255,255,255,0.9);
       backdrop-filter: blur(2px);
-      border-radius: 40px;
+      border-radius: 36px;
       padding: 1.8rem 1.5rem;
-      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(78, 159, 212, 0.15);
-      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
       cursor: pointer;
-      border: 1px solid rgba(255,255,255,0.6);
+      border: 1px solid rgba(100,180,200,0.3);
     }
     .card:hover {
-      transform: translateY(-8px);
+      transform: translateY(-6px);
       background: white;
-      box-shadow: 0 30px 45px -12px rgba(30, 90, 110, 0.25);
-      border-color: #40b5e0;
+      box-shadow: 0 30px 45px -12px rgba(30,90,80,0.25);
+      border-color: #2c9b77;
     }
-    .card-icon {
-      font-size: 3rem;
-      margin-bottom: 18px;
-      background: #eef6fc;
-      width: 65px;
-      height: 65px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 30px;
-    }
-    .card h3 {
-      font-size: 1.65rem;
-      font-weight: 700;
-      color: #1B3B4F;
-      margin-bottom: 10px;
-    }
-    .card-desc {
-      color: #4b6f8c;
-      line-height: 1.45;
-      margin-bottom: 20px;
-      font-size: 0.95rem;
-    }
-    .price {
-      font-weight: 800;
-      font-size: 1.5rem;
-      color: #1e6b5e;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+    .card-icon { font-size: 2.8rem; margin-bottom: 16px; }
+    .card h3 { font-size: 1.6rem; color: #1a4d5f; margin-bottom: 12px; }
+    .card-desc { color: #4f6f87; margin-bottom: 18px; line-height: 1.4; }
+    .price { font-weight: 800; font-size: 1.5rem; color: #1e6b5e; margin-bottom: 20px; }
     .order-btn {
-      background: linear-gradient(105deg, #1E6B5E, #239B7A);
+      background: linear-gradient(105deg, #1e6b5e, #239b7a);
       color: white;
       border: none;
-      padding: 12px 18px;
+      padding: 12px;
       border-radius: 60px;
       font-weight: 700;
-      font-size: 0.95rem;
       width: 100%;
       cursor: pointer;
       transition: 0.2s;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      align-items: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     }
-    .order-btn:hover {
-      background: linear-gradient(105deg, #0f5549, #1b7f61);
-      transform: scale(0.98);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
+    .order-btn:hover { transform: scale(0.98); background: linear-gradient(105deg, #0f5549, #1b7f61); }
 
-    /* модалка с дизайном стекла */
+    /* модалка */
     .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
+      background: rgba(0,0,0,0.55);
       backdrop-filter: blur(8px);
       display: flex;
       align-items: center;
@@ -155,97 +101,87 @@
       z-index: 1000;
       visibility: hidden;
       opacity: 0;
-      transition: all 0.25s ease;
+      transition: 0.2s;
     }
-    .modal-overlay.active {
-      visibility: visible;
-      opacity: 1;
-    }
+    .modal-overlay.active { visibility: visible; opacity: 1; }
     .modal-window {
-      background: #ffffffea;
-      backdrop-filter: blur(4px);
-      max-width: 600px;
-      width: 92%;
+      background: #ffffff;
+      max-width: 650px;
+      width: 95%;
       border-radius: 48px;
-      box-shadow: 0 40px 60px rgba(0, 0, 0, 0.3);
       overflow: hidden;
+      box-shadow: 0 40px 60px rgba(0,0,0,0.3);
       transform: scale(0.96);
-      transition: transform 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-      border: 1px solid rgba(255,255,240,0.8);
+      transition: transform 0.2s;
     }
-    .modal-overlay.active .modal-window {
-      transform: scale(1);
-    }
+    .modal-overlay.active .modal-window { transform: scale(1); }
     .modal-header {
-      background: linear-gradient(112deg, #1E6B5E, #2a8f73);
+      background: linear-gradient(112deg, #1e6b5e, #2a8f73);
       color: white;
-      padding: 20px 28px;
+      padding: 18px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .modal-header h3 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      letter-spacing: -0.3px;
-    }
+    .modal-header h3 { font-size: 1.5rem; font-weight: 700; }
     .close-modal {
       background: rgba(255,255,255,0.2);
       border: none;
-      color: white;
-      font-size: 28px;
+      width: 38px;
+      height: 38px;
+      border-radius: 38px;
+      font-size: 26px;
       cursor: pointer;
-      width: 40px;
-      height: 40px;
-      border-radius: 40px;
-      transition: 0.2s;
+      color: white;
     }
-    .close-modal:hover {
-      background: rgba(0,0,0,0.2);
-    }
-    .modal-body {
-      padding: 28px;
-    }
+    .modal-body { padding: 24px; max-height: 70vh; overflow-y: auto; }
     .selected-service-badge {
       background: #e7f2f5;
-      border-radius: 28px;
-      padding: 14px 20px;
-      margin-bottom: 24px;
-      border-left: 6px solid #239B7A;
-    }
-    .selected-service-badge strong {
-      display: block;
-      font-size: 1.25rem;
-      color: #1B3B4F;
+      border-radius: 24px;
+      padding: 12px 18px;
+      margin-bottom: 20px;
+      border-left: 5px solid #239b7a;
     }
     .geo-info {
-      background: #eff7fa;
-      border-radius: 20px;
-      padding: 12px 16px;
-      font-size: 0.8rem;
-      margin-bottom: 18px;
+      background: #eef3f8;
+      border-radius: 28px;
+      padding: 12px 18px;
+      margin-bottom: 20px;
       display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      align-items: center;
       justify-content: space-between;
-    }
-    .chat-title {
-      font-weight: 700;
-      margin: 12px 0 12px 0;
-      display: flex;
       align-items: center;
-      gap: 8px;
-      color: #204e69;
+      flex-wrap: wrap;
+      gap: 10px;
     }
+    .photo-upload {
+      background: #f8fafd;
+      border-radius: 28px;
+      padding: 12px 18px;
+      margin-bottom: 20px;
+      border: 1px dashed #8bb7cc;
+    }
+    .photo-preview {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .preview-img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 16px;
+      border: 2px solid #cde1ec;
+    }
+    .chat-title { font-weight: 700; margin: 16px 0 12px 0; display: flex; gap: 10px; align-items: center; }
     .chat-messages {
       background: #f6faff;
       border-radius: 28px;
-      padding: 18px;
+      padding: 16px;
       height: 260px;
       overflow-y: auto;
       border: 1px solid #cfe3ef;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       display: flex;
       flex-direction: column;
       gap: 12px;
@@ -253,157 +189,97 @@
     .message {
       max-width: 85%;
       padding: 10px 16px;
-      border-radius: 26px;
-      font-size: 0.9rem;
-      line-height: 1.4;
+      border-radius: 24px;
       word-break: break-word;
     }
-    .message.user {
-      background: #1f6e62;
-      color: white;
-      align-self: flex-end;
-      border-bottom-right-radius: 6px;
-    }
-    .message.bot {
-      background: #eef2f9;
-      color: #1e2f3c;
-      align-self: flex-start;
-      border-bottom-left-radius: 6px;
-      border: 1px solid #dbecf5;
-    }
-    .chat-input-group {
+    .message.user { background: #1f6e62; color: white; align-self: flex-end; border-bottom-right-radius: 6px; }
+    .message.bot { background: #eef2f9; color: #1e2f3c; align-self: flex-start; }
+    .message-img { max-width: 200px; border-radius: 16px; margin-top: 6px; cursor: pointer; }
+    .chat-input-group { display: flex; gap: 12px; margin-top: 8px; }
+    .chat-input { flex: 1; padding: 14px 20px; border-radius: 60px; border: 1px solid #cde1ec; outline: none; }
+    .send-btn { background: #1e6b5e; width: 50px; border-radius: 50px; border: none; color: white; font-size: 1.3rem; cursor: pointer; }
+    .file-label {
+      background: #eef3fc;
+      width: 50px;
+      border-radius: 50px;
       display: flex;
-      gap: 12px;
-    }
-    .chat-input {
-      flex: 1;
-      padding: 14px 20px;
-      border-radius: 60px;
-      border: 1px solid #cde1ec;
-      background: white;
-      font-size: 0.95rem;
-      outline: none;
-    }
-    .chat-input:focus {
-      border-color: #2a8f73;
-      box-shadow: 0 0 0 3px rgba(42,143,115,0.2);
-    }
-    .send-btn {
-      background: #1E6B5E;
-      border: none;
-      color: white;
-      width: 52px;
-      border-radius: 60px;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
       font-size: 1.4rem;
-      transition: 0.2s;
+      border: 1px solid #cfe3ef;
     }
-    .send-btn:hover {
-      background: #0f5548;
-    }
-    .telegram-note {
-      font-size: 0.7rem;
-      text-align: center;
-      margin-top: 16px;
-      color: #5b7f94;
-    }
-    .footer-note {
-      text-align: center;
-      margin-top: 45px;
-      font-size: 0.85rem;
-      background: rgba(255,255,240,0.7);
-      padding: 18px;
-      border-radius: 80px;
-      color: #2c5a74;
-    }
-    @media (max-width: 640px) {
-      .card { padding: 1.4rem; }
-      .modal-header h3 { font-size: 1.3rem; }
-    }
-    .live-badge {
-      background: #2a8f73;
-      border-radius: 30px;
-      color: white;
-      font-size: 0.7rem;
-      padding: 4px 12px;
-      display: inline-block;
-    }
+    .telegram-note { font-size: 0.7rem; text-align: center; margin-top: 15px; color: #5f7f97; }
+    .footer-note { text-align: center; margin-top: 40px; background: rgba(255,255,245,0.7); padding: 14px; border-radius: 60px; }
+    @media (max-width: 600px) { .modal-body { padding: 16px; } }
   </style>
 </head>
 <body>
 <div class="container">
   <div class="header">
-    <h1>⚡ СервисПрофи</h1>
-    <p>профессиональные услуги — быстрый чат, Telegram топики + геолокация</p>
-    <div class="badge-tele">🤖 Telegram Topics + WebSocket Ready</div>
+    <h1>📸 СервисПрофи</h1>
+    <p>Услуги + загрузка фото | Геолокация | Telegram топики (без спама)</p>
   </div>
-
   <div class="catalog" id="catalogContainer"></div>
-
   <div class="footer-note">
-    💬 Каждое обращение создаёт отдельный топик в Telegram-группе. Геолокация, услуга и переписка — всё в топике. WebSocket для реального времени.
+    🤖 Каждый клиент → отдельный топик в Telegram. Отправляйте фото, гео показывается на сайте и 1 раз в Telegram. Ответы менеджера не дублируются.
   </div>
 </div>
 
-<!-- Модальное окно -->
 <div id="orderModal" class="modal-overlay">
   <div class="modal-window">
     <div class="modal-header">
-      <h3>💎 Оформление</h3>
+      <h3>💬 Заказ + чат</h3>
       <button class="close-modal" id="closeModalBtn">&times;</button>
     </div>
     <div class="modal-body">
       <div class="selected-service-badge" id="selectedServiceDisplay">
-        <strong>📌 Услуга: <span id="serviceNameSpan"></span></strong>
-        <span id="servicePriceSpan" style="font-size:0.9rem;"></span>
+        <strong>📌 <span id="serviceNameSpan"></span></strong>
+        <span id="servicePriceSpan"></span>
       </div>
       <div class="geo-info" id="geoInfoBlock">
-        <span>🌍 Геолокация: </span><span id="geoStatus">Запрос...</span>
-        <button id="refreshGeoBtn" style="background: none; border:1px solid #bdd4e2; border-radius:30px; padding:4px 12px; cursor:pointer;">🔄 обновить</button>
+        <span>🌍 Геолокация:</span>
+        <span id="geoStatus">Запрос...</span>
+        <button id="refreshGeoBtn" style="background:#e2edf5; border:none; border-radius:30px; padding:5px 15px; cursor:pointer;">🔄</button>
+      </div>
+      <div class="photo-upload">
+        <div>📎 Прикрепить фото (отправится в Telegram топик):</div>
+        <input type="file" id="photoInput" accept="image/*" multiple style="margin-top: 8px;">
+        <div class="photo-preview" id="photoPreview"></div>
       </div>
       <div class="chat-area">
-        <div class="chat-title">
-          <span>💬 Чат поддержки (топик в Telegram)</span>
-          <span class="live-badge">Live WebSocket</span>
-        </div>
+        <div class="chat-title">💬 Чат с поддержкой (Telegram топик)</div>
         <div class="chat-messages" id="chatMessages">
-          <div class="message bot">✨ Привет! Выберите услугу, и я создам отдельную тему в группе. Напишите сообщение, все данные + геолокация будут в топике!</div>
+          <div class="message bot">✨ Выберите услугу, и для вас создадут топик. Отправляйте сообщения и фото — всё попадёт в Telegram группу.</div>
         </div>
         <div class="chat-input-group">
-          <input type="text" id="chatInput" class="chat-input" placeholder="Ваше сообщение..." autocomplete="off">
-          <button id="sendChatBtn" class="send-btn">➤</button>
+          <input type="text" id="chatInput" placeholder="Ваше сообщение..." autocomplete="off">
+          <label class="file-label" for="photoInputMobile" style="display:none;">📷</label>
+          <button class="send-btn" id="sendChatBtn">➤</button>
         </div>
-        <div class="telegram-note">
-          📡 WebSocket активен. Менеджер ответит прямо в этом чате (и в Telegram топике).
-        </div>
+        <div class="telegram-note">✅ Геолокация отправляется в Telegram 1 раз. Ответы менеджера не спамят.</div>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-  // -------------------- КОНФИГУРАЦИЯ TELEGRAM (ТОПИКИ + ГРУППА) --------------------
+  // ---------- КОНФИГУРАЦИЯ ----------
   const BOT_TOKEN = "8056378161:AAGZEJN4DePhkNhnUekD1tc5JMMKwfzdvnA";
-  const GROUP_ID = "-1003910735408";   // ID группы (без _1, но топики создаются через forum topic)
-  // для supergroup с включенными топиками используем метод createForumTopic
-  let currentTopicId = null;            // topic_id созданного топика
-  let currentSessionId = null;          // уникальный ключ для сессии
+  const GROUP_ID = "-1003910735408";
+  
+  let currentTopicId = null;
+  let currentSessionId = null;
   let currentSelectedService = null;
   let modalOpen = false;
   let userLocation = { lat: null, lon: null, address: "не определена" };
+  let geoAlreadySentToTelegram = false;   // флаг чтобы гео не спамить
+  let lastProcessedUpdateId = 0;
+  let pollingInterval = null;
+  let pendingPhotos = []; // для отправки фото в TG
 
-  // WebSocket (симуляция реального времени, но будем использовать polling + фейк-сокет обновления? 
-  // Реально для ответов менеджера будем использовать опрос getUpdates с привязкой к топику, но для простоты и надёжности организуем вебсокет-подобный механизм через long polling.
-  // Но по заданию "вебсокет соединение" — создадим имитацию через EventSource? Лучше настоящий WebSocket эхо-сервер? 
-  // В рамках статичного html можно создать фейковый WebSocket к серверу, но по условию правильнее создать интервал получения ответов (поток реального времени)
-  // для демонстрации "WebSocket соединения" создадим объект WebSocket к общедоступному эхо-серверу? не имеет смысла.
-  // Используем функционал: при отправке сообщения создаётся топик, и затем через механизм получения обновлений (polling с длинным таймаутом) получаем ответы.
-  // Но чтобы соответствовать слову "вебсокет" — отобразим индикацию соединения через конструкцию wsMock, и используем EventSource, но лучше сделаем кастомное событие с интервалом.
-  // Реализуем "WebSocket-like" polling с отображением статуса, но в интерфейсе назовём WebSocket соединение активным.
-  // Также добавим реальный сбор геолокации.
-
-  // ------------- ПОЛУЧЕНИЕ ГЕОЛОКАЦИИ -------------
-  function getGeoLocation() {
+  // ---------- ГЕОЛОКАЦИЯ (только для отображения на сайте) ----------
+  function getGeoLocation(updateTelegram = false) {
     const geoStatusSpan = document.getElementById("geoStatus");
     if (!geoStatusSpan) return;
     if ("geolocation" in navigator) {
@@ -411,191 +287,181 @@
         (position) => {
           userLocation.lat = position.coords.latitude;
           userLocation.lon = position.coords.longitude;
-          userLocation.address = `${userLocation.lat}, ${userLocation.lon}`;
-          geoStatusSpan.innerHTML = `📍 ${userLocation.lat.toFixed(5)}, ${userLocation.lon.toFixed(5)} <span style="opacity:0.7">(точная)</span>`;
-          // также пробуем обратный геокодинг (опционально)
-          fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${userLocation.lat}&lon=${userLocation.lon}&zoom=18&addressdetails=0`)
+          userLocation.address = `${userLocation.lat.toFixed(5)}, ${userLocation.lon.toFixed(5)}`;
+          geoStatusSpan.innerHTML = `📍 ${userLocation.address}`;
+          // обратный геокодинг для красоты
+          fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${userLocation.lat}&lon=${userLocation.lon}&zoom=16`)
             .then(res => res.json())
-            .then(data => {
-              if (data.display_name) {
-                userLocation.address = data.display_name.substring(0, 80);
-                geoStatusSpan.innerHTML = `📍 ${userLocation.address}`;
-              }
-            })
-            .catch(() => {});
+            .then(data => { if(data.display_name) { userLocation.address = data.display_name.substring(0, 70); geoStatusSpan.innerHTML = `📍 ${userLocation.address}`; } })
+            .catch(()=>{});
+          // опционально отправить гео в Telegram если надо и флаг false
+          if (updateTelegram && !geoAlreadySentToTelegram && currentTopicId && userLocation.lat) {
+            sendLocationToTelegramTopic();
+            geoAlreadySentToTelegram = true;
+          }
         },
-        (err) => {
-          geoStatusSpan.innerHTML = "❌ Геолокация недоступна (разрешите доступ)";
-          userLocation.lat = null;
-        },
-        { enableHighAccuracy: true, timeout: 10000 }
+        () => { geoStatusSpan.innerHTML = "❌ Нет доступа"; },
+        { enableHighAccuracy: true, timeout: 8000 }
       );
+    } else { geoStatusSpan.innerHTML = "⚠️ Не поддерживается"; }
+  }
+
+  async function sendLocationToTelegramTopic() {
+    if (!currentTopicId || !userLocation.lat) return;
+    const text = `📍 *Моя геолокация:*\n${userLocation.address}\nhttps://www.google.com/maps?q=${userLocation.lat},${userLocation.lon}`;
+    await sendMessageToTelegram(text, currentTopicId);
+  }
+
+  // отправка текста / фото в Telegram топик
+  async function sendMessageToTelegram(text, topicId = null, photoFile = null) {
+    const chatId = GROUP_ID;
+    let url, payload;
+    if (photoFile) {
+      const formData = new FormData();
+      formData.append("chat_id", chatId);
+      if (topicId) formData.append("message_thread_id", topicId);
+      formData.append("photo", photoFile);
+      formData.append("caption", text || "📸 Фото от клиента");
+      try {
+        const resp = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, { method: "POST", body: formData });
+        const json = await resp.json();
+        return json.ok;
+      } catch(e) { console.error("Ошибка отправки фото", e); return false; }
     } else {
-      geoStatusSpan.innerHTML = "⚠️ Браузер не поддерживает геолокацию";
+      url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+      payload = { chat_id: chatId, text: text, parse_mode: "Markdown" };
+      if (topicId) payload.message_thread_id = topicId;
+      try {
+        const resp = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+        const json = await resp.json();
+        return json.ok;
+      } catch(e) { return false; }
     }
   }
 
-  // ----- СОЗДАНИЕ ТОПИКА В ГРУППЕ -----
-  async function createTelegramTopic(serviceName, clientId) {
-    const topicName = `📌 Заказ: ${serviceName} | ${clientId.slice(0, 8)}`;
+  // создание топика + приветствие с услугой и гео (гео отправится 1 раз)
+  async function createTelegramTopicAndInit(serviceName, clientId) {
+    const topicName = `📦 Заказ: ${serviceName} | ${clientId.slice(-6)}`;
     const url = `https://api.telegram.org/bot${BOT_TOKEN}/createForumTopic`;
     try {
       const response = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          chat_id: GROUP_ID,
-          name: topicName,
-          icon_color: 0x6BA5E6
-        })
+        body: JSON.stringify({ chat_id: GROUP_ID, name: topicName, icon_color: 0x4A9B7A })
       });
       const data = await response.json();
       if (data.ok && data.result) {
         currentTopicId = data.result.message_thread_id;
-        console.log("Топик создан, ID:", currentTopicId);
-        // Отправляем в топик приветственное сообщение с данными клиента
-        await sendMessageToTelegramTopic(`🎉 *НОВЫЙ КЛИЕНТ* \n👤 ID сессии: ${clientId}\n🛒 Услуга: ${serviceName}\n🌍 Геолокация: ${userLocation.address || "не определена"}\n💬 Чат активен. Все сообщения будут в этом топике.`, currentTopicId);
-        return currentTopicId;
-      } else {
-        console.error("Ошибка создания топика:", data);
-        // fallback: возможно, топики не включены? используем без топика
-        currentTopicId = null;
-        return null;
-      }
-    } catch (e) {
-      console.warn("Ошибка сети при создании топика", e);
-      currentTopicId = null;
-      return null;
-    }
-  }
-
-  // Отправка сообщения в Telegram (в конкретный топик или в группу)
-  async function sendMessageToTelegramTopic(text, topicId = null) {
-    const payload = {
-      chat_id: GROUP_ID,
-      text: text,
-      parse_mode: "Markdown"
-    };
-    if (topicId) payload.message_thread_id = topicId;
-    const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-    try {
-      const resp = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-      const json = await resp.json();
-      return json.ok;
-    } catch(e) {
-      console.error("Send message error", e);
-      return false;
-    }
-  }
-
-  // Отправка сообщения клиента в Телеграм топик
-  async function forwardUserMessageToTelegram(messageText) {
-    if (!currentTopicId && currentSelectedService && currentSessionId) {
-      // создадим топик, если ещё нет
-      await createTelegramTopic(currentSelectedService.name, currentSessionId);
-    }
-    const finalTopic = currentTopicId;
-    const fullMsg = `💬 *Клиент:* ${messageText}`;
-    await sendMessageToTelegramTopic(fullMsg, finalTopic);
-    // также отправим геолокацию один раз, если ещё не отправляли и она есть
-    if (userLocation.lat && !window.geoSentFlag) {
-      window.geoSentFlag = true;
-      const locMsg = `📍 *Геолокация клиента:*\n${userLocation.address}\nhttps://www.google.com/maps?q=${userLocation.lat},${userLocation.lon}`;
-      await sendMessageToTelegramTopic(locMsg, finalTopic);
-    }
-  }
-
-  // Обработка получения ответов менеджера из Telegram (Polling с WebSocket-подобным обновлением)
-  let lastUpdateId = 0;
-  let pollingInterval = null;
-  async function startPollingForReplies() {
-    if (!BOT_TOKEN) return;
-    if (pollingInterval) clearInterval(pollingInterval);
-    const poll = async () => {
-      if (!modalOpen) return;
-      const url = `https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?offset=${lastUpdateId + 1}&timeout=10`;
-      try {
-        const resp = await fetch(url);
-        const data = await resp.json();
-        if (data.ok && data.result.length) {
-          for (const update of data.result) {
-            lastUpdateId = update.update_id;
-            const msg = update.message;
-            if (!msg || !msg.text) continue;
-            // проверяем, что сообщение пришло из нашего топика (если топик создан)
-            const topicIdMatch = (msg.message_thread_id && currentTopicId && msg.message_thread_id === currentTopicId);
-            const directGroup = (!currentTopicId && msg.chat.id.toString() === GROUP_ID);
-            if (topicIdMatch || directGroup) {
-              // это ответ менеджера
-              const answerText = msg.text;
-              // Исключаем сообщения, отправленные ботом (если нужно)
-              if (msg.from && msg.from.is_bot) continue;
-              // Добавляем в чат сайта
-              addBotMessageToChat(answerText);
-            }
-          }
+        // отправляем базовые данные в топик
+        await sendMessageToTelegram(`🎉 *НОВЫЙ ЗАКАЗ* \n👤 ID: ${clientId}\n🛒 Услуга: ${serviceName}\n🌍 Геолокация будет отправлена следом.`, currentTopicId);
+        // отправляем гео один раз
+        if (userLocation.lat && !geoAlreadySentToTelegram) {
+          await sendLocationToTelegramTopic();
+          geoAlreadySentToTelegram = true;
         }
-      } catch(e) { console.warn(e); }
-    };
-    pollingInterval = setInterval(poll, 3000);
-    poll();
+        return currentTopicId;
+      } else { console.warn("Ошибка создания топика", data); return null; }
+    } catch(e) { console.warn(e); return null; }
   }
 
-  // Добавление сообщения в интерфейс чата
+  // Отправка сообщения пользователем (текст + фото)
+  async function sendUserMessage(messageText, files = []) {
+    if (!messageText && files.length === 0) return;
+    if (messageText) addMessageToChat(messageText, "user");
+    // отправляем в топик
+    if (currentTopicId && currentSelectedService) {
+      if (messageText) await sendMessageToTelegram(`💬 *Клиент:* ${messageText}`, currentTopicId);
+      for (let file of files) {
+        await sendMessageToTelegram("📎 Фото от клиента", currentTopicId, file);
+        addMessageToChat(`📸 Фото отправлено`, "user", file);
+      }
+    }
+    document.getElementById("chatInput").value = "";
+    pendingPhotos = [];
+    document.getElementById("photoPreview").innerHTML = "";
+  }
+
+  function addMessageToChat(text, sender, imageFile = null) {
+    const container = document.getElementById("chatMessages");
+    const msgDiv = document.createElement("div");
+    msgDiv.className = `message ${sender}`;
+    if (imageFile && sender === "user") {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = document.createElement("img");
+        img.src = e.target.result;
+        img.className = "message-img";
+        msgDiv.innerHTML = `${text}<br>`;
+        msgDiv.appendChild(img);
+      };
+      reader.readAsDataURL(imageFile);
+    } else {
+      msgDiv.innerText = text;
+    }
+    container.appendChild(msgDiv);
+    container.scrollTop = container.scrollHeight;
+  }
+
   function addBotMessageToChat(text) {
     const container = document.getElementById("chatMessages");
     const msgDiv = document.createElement("div");
     msgDiv.className = "message bot";
     msgDiv.innerText = text;
     container.appendChild(msgDiv);
-    scrollChatToBottom();
+    container.scrollTop = container.scrollHeight;
   }
 
-  function addUserMessageToChat(text) {
-    const container = document.getElementById("chatMessages");
-    const msgDiv = document.createElement("div");
-    msgDiv.className = "message user";
-    msgDiv.innerText = text;
-    container.appendChild(msgDiv);
-    scrollChatToBottom();
+  // ПОЛЛИНГ ответов менеджера (убираем спам, дубликаты)
+  async function pollManagerReplies() {
+    if (!modalOpen) return;
+    const url = `https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?offset=${lastProcessedUpdateId + 1}&timeout=10`;
+    try {
+      const resp = await fetch(url);
+      const data = await resp.json();
+      if (data.ok && data.result.length) {
+        for (const update of data.result) {
+          lastProcessedUpdateId = update.update_id;
+          const msg = update.message;
+          if (!msg || !msg.text) continue;
+          // сообщение в нашем топике или группе, но не от бота и не от нас самих (клиент не видит свои дубли)
+          const inOurTopic = (msg.message_thread_id && currentTopicId && msg.message_thread_id === currentTopicId);
+          const inGroupDirect = (!currentTopicId && msg.chat.id.toString() === GROUP_ID);
+          if ((inOurTopic || inGroupDirect) && msg.from && !msg.from.is_bot) {
+            // ответ менеджера
+            addBotMessageToChat(`🧑‍💼 Менеджер: ${msg.text}`);
+          }
+        }
+      }
+    } catch(e) { console.warn(e); }
   }
 
-  function scrollChatToBottom() {
-    const messagesDiv = document.getElementById("chatMessages");
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
-  }
-
-  async function sendUserMessage(messageText) {
-    if (!messageText.trim()) return;
-    addUserMessageToChat(messageText);
-    // отправляем в телеграм топик
-    if (currentSelectedService) {
-      await forwardUserMessageToTelegram(messageText);
-    } else {
-      console.warn("Нет услуги");
-    }
-    // очистка инпута
-    document.getElementById("chatInput").value = "";
-    // небольшая имитация что менеджер получил
-    setTimeout(() => {
-      if (modalOpen) addBotMessageToChat("✉️ Сообщение доставлено в Telegram топик. Ответ менеджера появится здесь...");
-    }, 500);
-  }
+  // ---------- ФОТО ПРЕВЬЮ ----------
+  const photoInput = document.getElementById("photoInput");
+  const photoPreviewDiv = document.getElementById("photoPreview");
+  photoInput.addEventListener("change", (e) => {
+    pendingPhotos = Array.from(e.target.files);
+    photoPreviewDiv.innerHTML = "";
+    pendingPhotos.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const img = document.createElement("img");
+        img.src = ev.target.result;
+        img.className = "preview-img";
+        photoPreviewDiv.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    });
+  });
 
   // ---------- КАТАЛОГ УСЛУГ ----------
   const services = [
-    { id: 1, name: "Разработка сайта", description: "Сайт под ключ, React / Vue, админ-панель", price: "от 49 900 ₽", icon: "💎" },
-    { id: 2, name: "SEO-продвижение", description: "ТОП-10 Яндекс/Google, семантика", price: "от 28 000 ₽/мес", icon: "📊" },
-    { id: 3, name: "Контекстная реклама", description: "Яндекс.Директ, Google Ads, лиды", price: "от 22 000 ₽", icon: "🎯" },
-    { id: 4, name: "Дизайн & брендинг", description: "Логотип, айдентика, гайдлайн", price: "от 18 000 ₽", icon: "🎨" },
-    { id: 5, name: "Техподдержка 24/7", description: "Мониторинг, бэкапы, фиксы", price: "от 14 500 ₽/мес", icon: "⚙️" },
-    { id: 6, name: "SMM-менеджмент", description: "Креативы, таргет, вовлечение", price: "от 32 000 ₽", icon: "📱" }
+    { id: 1, name: "Разработка сайта", desc: "Fullstack, адаптив, производительность", price: "от 49 900 ₽", icon: "💻" },
+    { id: 2, name: "SEO продвижение", desc: "ТОП-10, рост трафика", price: "от 28 000 ₽/мес", icon: "📈" },
+    { id: 3, name: "Контекстная реклама", desc: "Яндекс / Google, лидогенерация", price: "от 22 000 ₽", icon: "🎯" },
+    { id: 4, name: "Дизайн + брендинг", desc: "Логотип, стиль, гайд", price: "от 18 000 ₽", icon: "🎨" },
+    { id: 5, name: "Техподдержка", desc: "24/7, мониторинг, бэкапы", price: "от 14 500 ₽/мес", icon: "⚙️" },
+    { id: 6, name: "SMM менеджмент", desc: "Креативы, таргет, аналитика", price: "от 32 000 ₽", icon: "📱" }
   ];
-
   const catalogContainer = document.getElementById("catalogContainer");
   const modalOverlay = document.getElementById("orderModal");
   const closeModalBtn = document.getElementById("closeModalBtn");
@@ -607,75 +473,76 @@
 
   function renderCatalog() {
     catalogContainer.innerHTML = "";
-    services.forEach(service => {
+    services.forEach(s => {
       const card = document.createElement("div");
       card.className = "card";
       card.innerHTML = `
-        <div class="card-icon">${service.icon}</div>
-        <h3>${service.name}</h3>
-        <div class="card-desc">${service.description}</div>
-        <div class="price">${service.price}</div>
-        <button class="order-btn" data-id="${service.id}">📩 Выбрать →</button>
+        <div class="card-icon">${s.icon}</div>
+        <h3>${s.name}</h3>
+        <div class="card-desc">${s.desc}</div>
+        <div class="price">${s.price}</div>
+        <button class="order-btn">📋 Заказать</button>
       `;
-      const btn = card.querySelector(".order-btn");
-      btn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        openModalWithService(service);
-      });
+      card.querySelector(".order-btn").addEventListener("click", () => openModal(s));
       catalogContainer.appendChild(card);
     });
   }
 
-  async function openModalWithService(service) {
+  async function openModal(service) {
     currentSelectedService = service;
     currentSessionId = `user_${Date.now()}_${Math.floor(Math.random()*10000)}`;
     currentTopicId = null;
-    window.geoSentFlag = false;
+    geoAlreadySentToTelegram = false;
+    userLocation = { lat: null, lon: null, address: "не определена" };
     serviceNameSpan.innerText = `${service.name} ${service.icon}`;
     servicePriceSpan.innerText = service.price;
-    const chatContainer = document.getElementById("chatMessages");
-    chatContainer.innerHTML = `<div class="message bot">✨ Добро пожаловать! Вы выбрали "${service.name}" (${service.price}). Сейчас я создам топик в Telegram-группе и привяжу геолокацию. Напишите вопрос.</div>`;
+    document.getElementById("chatMessages").innerHTML = `<div class="message bot">✨ Вы выбрали: ${service.name} (${service.price}). Создаю топик в Telegram...</div>`;
     modalOverlay.classList.add("active");
     modalOpen = true;
-    // Получить гео
-    getGeoLocation();
-    // Создаём топик сразу после открытия
-    await createTelegramTopic(service.name, currentSessionId);
-    // Запускаем polling для ответов
-    if (!pollingInterval) startPollingForReplies();
+    // сначала запрашиваем гео (только для показа)
+    getGeoLocation(false);
+    // создаём топик и отправляем гео один раз
+    await createTelegramTopicAndInit(service.name, currentSessionId);
+    addBotMessageToChat(`📌 Топик создан! Теперь вы можете писать сообщения и отправлять фото. Ответы менеджера приходят без дублей.`);
+    // запускаем polling для ответов
+    if (pollingInterval) clearInterval(pollingInterval);
+    pollingInterval = setInterval(() => pollManagerReplies(), 3500);
     chatInput.focus();
   }
 
   function closeModal() {
     modalOverlay.classList.remove("active");
     modalOpen = false;
-    currentSelectedService = null;
-    if (pollingInterval) {
-      clearInterval(pollingInterval);
-      pollingInterval = null;
-    }
+    if (pollingInterval) { clearInterval(pollingInterval); pollingInterval = null; }
+    pendingPhotos = [];
+    if(photoPreviewDiv) photoPreviewDiv.innerHTML = "";
+    geoAlreadySentToTelegram = false;
   }
 
   refreshGeoBtn.addEventListener("click", () => {
-    getGeoLocation();
-    if (currentTopicId && userLocation.lat) {
-      sendMessageToTelegramTopic(`🔄 *Обновленная геолокация:* ${userLocation.address}\nhttps://maps.google.com/?q=${userLocation.lat},${userLocation.lon}`, currentTopicId);
+    getGeoLocation(true);
+    if (!geoAlreadySentToTelegram && currentTopicId && userLocation.lat) {
+      sendLocationToTelegramTopic();
+      geoAlreadySentToTelegram = true;
+      addBotMessageToChat("🌍 Геолокация отправлена в Telegram.");
     }
   });
 
   sendChatBtn.addEventListener("click", async () => {
-    const msg = chatInput.value.trim();
-    if (!msg) return;
-    await sendUserMessage(msg);
+    const msgText = chatInput.value.trim();
+    if (!msgText && pendingPhotos.length === 0) return;
+    await sendUserMessage(msgText, pendingPhotos);
+    pendingPhotos = [];
+    if(photoPreviewDiv) photoPreviewDiv.innerHTML = "";
+    photoInput.value = "";
   });
-  chatInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") { e.preventDefault(); sendChatBtn.click(); }
-  });
+
+  chatInput.addEventListener("keypress", (e) => { if(e.key === "Enter") { e.preventDefault(); sendChatBtn.click(); } });
   closeModalBtn.addEventListener("click", closeModal);
-  modalOverlay.addEventListener("click", (e) => { if (e.target === modalOverlay) closeModal(); });
+  modalOverlay.addEventListener("click", (e) => { if(e.target === modalOverlay) closeModal(); });
 
   renderCatalog();
-  console.log("Сайт готов: WebSocket polling (реал-тайм) + Telegram топики + геолокация");
+  console.log("✅ Система готова: фото, гео без спама, ответы без дубликатов");
 </script>
 </body>
 </html>
