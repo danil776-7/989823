@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>СервисПрофи | Каталог услуг с чатом Telegram</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(145deg, #f4f8fe 0%, #e9f0f7 100%);
+      min-height: 100vh;
+      padding: 30px 20px 60px;
+    }
+
+    /* контейнер */
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    /* шапка */
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .header h1 {
+      font-size: 2.6rem;
+      background: linear-gradient(135deg, #1A2A3F, #0F3B5C);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+    }
+    .header p {
+      color: #2c5368;
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+
+    /* каталог - сетка */
+    .catalog {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 28px;
+      margin-bottom: 60px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 28px;
+      padding: 1.8rem 1.5rem;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0,0,0,0.02);
+      transition: all 0.25s ease;
+      cursor: pointer;
+      border: 1px solid rgba(74, 144, 226, 0.15);
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 25px 40px rgba(0, 0, 0, 0.1);
+      border-color: #4a90e2;
+    }
+    .card-icon {
+      font-size: 2.8rem;
+      margin-bottom: 18px;
+    }
+    .card h3 {
+      font-size: 1.6rem;
+      color: #1a2a3f;
+      margin-bottom: 12px;
+    }
+    .card-desc {
+      color: #4a627a;
+      line-height: 1.4;
+      margin-bottom: 20px;
+    }
+    .price {
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: #0f3b5c;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .order-btn {
+      background: #1f6392;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      width: 100%;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      align-items: center;
+    }
+    .order-btn:hover {
+      background: #0e4b70;
+      transform: scale(0.98);
+    }
+
+    /* модальное окно */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      visibility: hidden;
+      opacity: 0;
+      transition: all 0.2s ease;
+    }
+    .modal-overlay.active {
+      visibility: visible;
+      opacity: 1;
+    }
+    .modal-window {
+      background: #ffffff;
+      max-width: 550px;
+      width: 90%;
+      border-radius: 40px;
+      box-shadow: 0 30px 50px rgba(0,0,0,0.3);
+      overflow: hidden;
+      transform: scale(0.95);
+      transition: transform 0.2s ease;
+    }
+    .modal-overlay.active .modal-window {
+      transform: scale(1);
+    }
+    .modal-header {
+      background: #1f6392;
+      color: white;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-header h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    .close-modal {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .modal-body {
+      padding: 24px;
+    }
+    .selected-service-badge {
+      background: #eef3fc;
+      border-radius: 60px;
+      padding: 12px 18px;
+      margin-bottom: 24px;
+      border-left: 5px solid #1f6392;
+    }
+    .selected-service-badge strong {
+      display: block;
+      font-size: 1.2rem;
+      color: #0f3b5c;
+    }
+    .chat-area {
+      margin-top: 20px;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 20px;
+    }
+    .chat-title {
+      font-weight: 600;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .chat-messages {
+      background: #f8fafc;
+      border-radius: 24px;
+      padding: 16px;
+      height: 220px;
+      overflow-y: auto;
+      border: 1px solid #cbd5e1;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .message {
+      max-width: 85%;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    .message.user {
+      background: #1f6392;
+      color: white;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+    .message.bot {
+      background: #e9eef3;
+      color: #1e293b;
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+    .chat-input-group {
+      display: flex;
+      gap: 12px;
+    }
+    .chat-input {
+      flex: 1;
+      padding: 12px 16px;
+      border-radius: 40px;
+      border: 1px solid #cbd5e1;
+      font-size: 0.9rem;
+      outline: none;
+      transition: 0.2s;
+    }
+    .chat-input:focus {
+      border-color: #1f6392;
+      box-shadow: 0 0 0 2px rgba(31,99,146,0.2);
+    }
+    .send-btn {
+      background: #1f6392;
+      border: none;
+      color: white;
+      width: 44px;
+      border-radius: 44px;
+      cursor: pointer;
+      font-size: 1.3rem;
+      transition: 0.2s;
+    }
+    .send-btn:hover {
+      background: #0e4b70;
+    }
+    .telegram-note {
+      font-size: 0.7rem;
+      text-align: center;
+      margin-top: 12px;
+      color: #5b6e8c;
+    }
+    .footer-note {
+      text-align: center;
+      margin-top: 40px;
+      color: #5f7d9c;
+      font-size: 0.8rem;
+      border-top: 1px solid #cddfe7;
+      padding-top: 24px;
+    }
+    @media (max-width: 650px) {
+      .catalog {
+        gap: 18px;
+      }
+      .modal-window {
+        width: 95%;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>✨ ПрофиСервис</h1>
+    <p>Выберите услугу — откроется чат для заказа. Все сообщения уходят в Telegram и вы получите ответ там же</p>
+  </div>
+
+  <div class="catalog" id="catalogContainer"></div>
+
+  <div class="footer-note">
+    📲 Чат подключен к Telegram боту. Ваши сообщения приходят агенту, ответы отображаются здесь и дублируются в Telegram.
+  </div>
+</div>
+
+<!-- Модальное окно с чатом и выбранной услугой -->
+<div id="orderModal" class="modal-overlay">
+  <div class="modal-window">
+    <div class="modal-header">
+      <h3>📋 Оформление заказа</h3>
+      <button class="close-modal" id="closeModalBtn">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="selected-service-badge" id="selectedServiceDisplay">
+        <strong>Услуга: <span id="serviceNameSpan"></span></strong>
+        <span id="servicePriceSpan" style="font-size:0.9rem;"></span>
+      </div>
+      
+      <div class="chat-area">
+        <div class="chat-title">
+          <span>💬 Чат с поддержкой (Telegram)</span>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+          <div class="message bot">👋 Здравствуйте! Напишите, что вас интересует по выбранной услуге, и мы свяжемся с вами в Telegram. Ваши сообщения уходят менеджеру.</div>
+        </div>
+        <div class="chat-input-group">
+          <input type="text" id="chatInput" class="chat-input" placeholder="Введите сообщение..." autocomplete="off">
+          <button id="sendChatBtn" class="send-btn">➤</button>
+        </div>
+        <div class="telegram-note">
+          🔗 Чат привязан к Telegram: ответы придут сюда и в ваш личный Telegram-диалог с ботом.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ---------- КАТАЛОГ УСЛУГ ----------
+  const services = [
+    { id: 1, name: "Разработка сайта", description: "Создание сайта под ключ, адаптивный дизайн, админка", price: "от 45 000 ₽", icon: "💻" },
+    { id: 2, name: "SEO-продвижение", description: "Вывод в топ, анализ конкурентов, рост трафика", price: "от 25 000 ₽/мес", icon: "📈" },
+    { id: 3, name: "Контекстная реклама", description: "Яндекс.Директ, Google Ads, настройка и ведение", price: "от 20 000 ₽", icon: "🎯" },
+    { id: 4, name: "Дизайн & брендинг", description: "Логотип, фирменный стиль, упаковка", price: "от 15 000 ₽", icon: "🎨" },
+    { id: 5, name: "Техподдержка 24/7", description: "Обслуживание серверов, баги, апдейты", price: "от 12 000 ₽/мес", icon: "🛠️" },
+    { id: 6, name: "SMM продвижение", description: "Ведение соцсетей, контент, таргет", price: "от 30 000 ₽", icon: "📱" }
+  ];
+
+  // Замените на реальные данные вашего Telegram бота
+  // ПОЛУЧИТЬ ТОКЕН И CHAT_ID: @BotFather создать бота, получить токен. Затем получить свой chat_id через @userinfobot или api.telegram.org/bot<TOKEN>/getUpdates
+  // НИЖЕ ПРИМЕР ДЛЯ ТЕСТА (замените на свои данные чтобы сообщения реально приходили в телеграм)
+  const TELEGRAM_BOT_TOKEN = "YOUR_BOT_TOKEN_HERE";   // ВСТАВЬТЕ ВАШ ТОКЕН БОТА
+  const TELEGRAM_CHAT_ID = "YOUR_CHAT_ID_HERE";      // ВАШ ID (куда будут лететь сообщения)
+  
+  // Флаг включения телеграм-отправки (если токен/айди не заменены, просто логируем в консоль)
+  const isTelegramConfigured = TELEGRAM_BOT_TOKEN !== "YOUR_BOT_TOKEN_HERE" && TELEGRAM_CHAT_ID !== "YOUR_CHAT_ID_HERE";
+
+  // Переменные состояния модалки
+  let currentSelectedService = null;
+  let modalOpen = false;
+  
+  // Элементы DOM
+  const catalogContainer = document.getElementById("catalogContainer");
+  const modalOverlay = document.getElementById("orderModal");
+  const closeModalBtn = document.getElementById("closeModalBtn");
+  const serviceNameSpan = document.getElementById("serviceNameSpan");
+  const servicePriceSpan = document.getElementById("servicePriceSpan");
+  const chatMessagesDiv = document.getElementById("chatMessages");
+  const chatInput = document.getElementById("chatInput");
+  const sendChatBtn = document.getElementById("sendChatBtn");
+
+  // ----- Функция отправки сообщения в Telegram (через бота) -----
+  async function sendMessageToTelegram(userMessage, serviceInfo = null) {
+    if (!isTelegramConfigured) {
+      console.log("⚠️ Telegram не настроен: укажите BOT_TOKEN и CHAT_ID в коде. Сообщение (лог):", userMessage);
+      // Имитируем ответ бота (для демо автоматический ответ)
+      return false;
+    }
+    
+    // Формируем текст для телеграм. Добавляем данные об услуге, если есть
+    let fullMessage = `📩 *Новое сообщение из чата сайта*\n`;
+    if (serviceInfo) {
+      fullMessage += `🛒 *Выбранная услуга:* ${serviceInfo.name} — ${serviceInfo.price}\n`;
+    }
+    fullMessage += `💬 *Текст:*\n${userMessage}\n\n_Ответьте в этом диалоге, и ответ увидят на сайте._`;
+    
+    const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text: fullMessage,
+          parse_mode: "Markdown"
+        })
+      });
+      const data = await response.json();
+      if (data.ok) {
+        console.log("Сообщение доставлено в Telegram ✅");
+        return true;
+      } else {
+        console.error("Ошибка Telegram API:", data);
+        return false;
+      }
+    } catch (err) {
+      console.error("Ошибка отправки в Telegram:", err);
+      return false;
+    }
+  }
+
+  // Функция для имитации ответа от менеджера (можно вызвать когда получим сообщение из Telegram через webhook)
+  // Но для демо-режима, чтобы показать, что можно отвечать из телеграма, сделаем "проверку новых сообщений" 
+  // В реальном проекте лучше использовать Long Polling или Webhook, но здесь для простоты сделаем симуляцию:
+  // Пользователь может вручную получать ответы, но поскольку в задании: "чтоб написаные сообщения переходили в телеграм и отвечать на них так же в телеграм"
+  // Мы реализуем механизм: когда мы отправляем сообщение – оно уходит в телеграм. Чтобы ответить клиенту, менеджер пишет в чат с ботом (тот же диалог)
+  // и чтобы ответ пришел на сайт, нужно получать обновления. Чтобы это работало без серверной части, используем простой метод: 
+  // периодический опрос (polling) — каждые 5 секунд проверяем новые сообщения от бота, адресованные этому чату (по ключу).
+  // Идея: при старте сессии генерируем уникальный sessionId, при отправке сообщения в телеграм будем включать этот sessionId в текст.
+  // Но для наглядности в рамках одного клиента запоминаем последнее сообщение и показываем ответы, которые пришли после последнего запрошенного update_id.
+  // Упростим: будем получать последние сообщения из чата с ботом (отправленные менеджером в ответ), и если среди них есть текст,
+  // не содержащий команд, выводим в чат. Для корректной работы надо сопоставлять, но так как токен один — будут видны все сообщения.
+  // Для чистоты сделаем просто: каждые 5 секунд запрашиваем updates, и показываем в чате все сообщения, отправленные в бот ПОСЛЕ последнего полученного, которые не начинаются с "/" и не от нашего юзера.
+  // Логично: ведем историю ID сообщений в браузере, сообщения от менеджера отображаем как 'бот'
+  
+  let lastUpdateId = 0;   // храним последний обработанный update_id
+  let sessionChatHistory = [];  // для отображения локально (необязательно)
+  
+  // Функция получения обновлений из Telegram (polling)
+  async function pollTelegramMessages() {
+    if (!isTelegramConfigured) return;
+    
+    const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getUpdates?offset=${lastUpdateId + 1}&timeout=10&allowed_updates=["message"]`;
+    try {
+      const resp = await fetch(url);
+      const data = await resp.json();
+      if (data.ok && data.result.length > 0) {
+        for (const update of data.result) {
+          const message = update.message;
+          if (message && message.text && message.from) {
+            // Игнорируем сообщения, которые отправил сам бот? Но бот не отвечает сам себе, но если менеджер пишет от своего ID — это от человека.
+            // Также сообщения, отправленные нашим веб-клиентом не должны дублироваться: их мы не можем идентифицировать, но т.к. они не проходят через getUpdates как сообщения от "менеджера",
+            // то они просто не будут отображены повторно. Также нужно исключить сообщения, которые мы сами отправляем через API? Когда мы отправляем сообщение клиента — оно не попадает в getUpdates от имени юзера.
+            // Нам подходят любые текстовые сообщения, которые пришли в бот, т.к. менеджер ответит в диалог. Добавим их в чат.
+            const incomingText = message.text;
+            const isFromManager = true; // любой ответ это менеджер
+            // Добавляем системное сообщение в чат, если его еще нет (избегаем дублей по тексту+времени, но проще проверять по id)
+            // уникальный идентификатор сообщения - update.update_id
+            addBotMessageToChat(incomingText);
+          }
+          if (update.update_id > lastUpdateId) lastUpdateId = update.update_id;
+        }
+      }
+    } catch (err) {
+      console.warn("Polling error:", err);
+    }
+  }
+
+  // Добавляем сообщение от бота в чат, если окно открыто
+  function addBotMessageToChat(text) {
+    // проверяем, нет ли точно такого же сообщения в последних 3-х (чтобы избежать дубля при нескольких пуллах)
+    const messagesDiv = chatMessagesDiv;
+    const lastBotMsg = Array.from(messagesDiv.querySelectorAll('.message.bot')).pop();
+    if (lastBotMsg && lastBotMsg.innerText === text) return;
+    
+    const msgDiv = document.createElement('div');
+    msgDiv.className = 'message bot';
+    msgDiv.innerText = text;
+    chatMessagesDiv.appendChild(msgDiv);
+    scrollChatToBottom();
+  }
+
+  // Отправка сообщения пользователя (из модалки)
+  async function sendUserMessage(messageText) {
+    if (!messageText.trim()) return;
+    // добавить сообщение пользователя в чат на сайте
+    const userMsgDiv = document.createElement('div');
+    userMsgDiv.className = 'message user';
+    userMsgDiv.innerText = messageText;
+    chatMessagesDiv.appendChild(userMsgDiv);
+    scrollChatToBottom();
+    
+    // сохраняем сообщение
+    const servicePayload = currentSelectedService ? { name: currentSelectedService.name, price: currentSelectedService.price } : null;
+    // отправить в Telegram
+    const fullMessageForTelegram = `[Клиент] ${messageText}\n📌 Услуга: ${servicePayload ? servicePayload.name + ' ' + servicePayload.price : 'Не указана'}`;
+    await sendMessageToTelegram(fullMessageForTelegram, servicePayload);
+    
+    // также можно очистить инпут
+    chatInput.value = "";
+    
+    // небольшая подсказка (автоответ - не обязательно, но для UX напишем, что ожидаем ответа от менеджера)
+    // Показывать "менеджер увидел"
+    const infoMsg = document.createElement('div');
+    infoMsg.className = 'message bot';
+    infoMsg.innerText = '✉️ Сообщение отправлено менеджеру в Telegram. Ответ появится здесь, как только вы получите его в Telegram.';
+    chatMessagesDiv.appendChild(infoMsg);
+    scrollChatToBottom();
+    setTimeout(() => infoMsg.remove(), 5000);
+  }
+  
+  function scrollChatToBottom() {
+    const container = chatMessagesDiv;
+    container.scrollTop = container.scrollHeight;
+  }
+
+  // Открыть модалку с выбранной услугой
+  function openModalWithService(service) {
+    currentSelectedService = service;
+    serviceNameSpan.innerText = `${service.name} ${service.icon}`;
+    servicePriceSpan.innerText = service.price;
+    
+    // Очищаем чат, но можно сохранить приветствие базовое
+    chatMessagesDiv.innerHTML = '';
+    const welcomeMsg = document.createElement('div');
+    welcomeMsg.className = 'message bot';
+    welcomeMsg.innerText = `👋 Добрый день! Вы выбрали "${service.name}" (${service.price}). Напишите ваш вопрос или детали заказа, и наш специалист ответит в Telegram.`;
+    chatMessagesDiv.appendChild(welcomeMsg);
+    
+    modalOverlay.classList.add('active');
+    modalOpen = true;
+    chatInput.focus();
+    
+    // Запускаем опрос Telegram при открытии модалки, если ещё не запущен (ставим интервал)
+    if (isTelegramConfigured && !window.pollInterval) {
+      window.pollInterval = setInterval(() => {
+        if (modalOpen) pollTelegramMessages();
+      }, 5000);
+      pollTelegramMessages(); // сразу проверить
+    } else if (!isTelegramConfigured && !window.pollInterval) {
+      // для демо показываем сообщение о том, что телеграм не настроен
+      if(!window.demoNoticeShown) {
+        window.demoNoticeShown = true;
+        console.warn("Демо-режим: телеграм бот не настроен, отправка сообщений только в консоль. Чтобы получать ответы реально, укажите BOT_TOKEN и CHAT_ID в скрипте.");
+      }
+    }
+  }
+
+  function closeModal() {
+    modalOverlay.classList.remove('active');
+    modalOpen = false;
+    currentSelectedService = null;
+    // можно очистить
+  }
+
+  // Отображение каталога
+  function renderCatalog() {
+    catalogContainer.innerHTML = '';
+    services.forEach(service => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="card-icon">${service.icon}</div>
+        <h3>${service.name}</h3>
+        <div class="card-desc">${service.description}</div>
+        <div class="price">${service.price}</div>
+        <button class="order-btn" data-id="${service.id}">📞 Заказать →</button>
+      `;
+      const btn = card.querySelector('.order-btn');
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openModalWithService(service);
+      });
+      catalogContainer.appendChild(card);
+    });
+  }
+
+  // обработчики модалки
+  closeModalBtn.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) closeModal();
+  });
+
+  sendChatBtn.addEventListener('click', async () => {
+    const msg = chatInput.value.trim();
+    if (!msg) return;
+    await sendUserMessage(msg);
+  });
+  chatInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      sendChatBtn.click();
+    }
+  });
+
+  // Инициализация при загрузке
+  renderCatalog();
+  
+  // Если телеграм не настроен, выводим предупреждение удобное для демонстрации, но функционал работает внутри консоли.
+  if (!isTelegramConfigured) {
+    const note = document.createElement('div');
+    note.style.background = "#fff3cd";
+    note.style.padding = "10px";
+    note.style.borderRadius = "50px";
+    note.style.marginBottom = "20px";
+    note.style.textAlign = "center";
+    note.innerHTML = "⚠️ Для реальной интеграции с Telegram укажите BOT_TOKEN и CHAT_ID в коде. Сейчас сообщения логируются в консоли браузера (F12).";
+    document.querySelector('.container').insertBefore(note, document.querySelector('.catalog'));
+  } else {
+    // Запускаем polling глобально, если настроен бот, но не открыто модальное окно - можно фоном не часто, но всё же для приема ответов без открытого окна?
+    // по желанию: poll всегда если настроен
+    if (!window.pollIntervalGlobal) {
+      window.pollIntervalGlobal = setInterval(() => {
+        if (!modalOpen) return; // если модалка закрыта, не обновляем чат, но можно тихо фоново, но чтоб не грузить
+        pollTelegramMessages();
+      }, 7000);
+    }
+  }
+  
+  // Дополнительно: если в телеграм менеджер ответит на сообщение, оно появится в открытом модальном окне.
+  // Полноценный энд-ту-энд: отправка в телеграм, получение ответов от менеджера в том же окне.
+</script>
+</body>
+</html>
